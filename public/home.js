@@ -78,14 +78,13 @@ function viewDetails(p_id) {
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "/productInfo");
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify({ id: p_id }));
+  xhr.send(JSON.stringify({p_id }));
 
   xhr.addEventListener("load", () => {
+    console.log(xhr.response);
     let response = JSON.parse(xhr.response);
     if (response.msg === "Success") {
-      let product = response.data;
-      if (product.length !== 0) {
-        let productInfo = product[0];
+        let productInfo = response.data;
         console.log(productInfo);
         popUp.classList.toggle("hidden");
         popImg.src = `/uploads/${productInfo["productimage"]}`;
@@ -98,7 +97,6 @@ function viewDetails(p_id) {
         addToCart.onclick = () => {
           addItemToCart(p_id, 1);
         };
-      }
     } else {
       console.log("Error");
     }

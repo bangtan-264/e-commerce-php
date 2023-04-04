@@ -39,11 +39,25 @@ function appendOneItem(item) {
 </div>
 <div class="cart-btn cart-item">
 <p class="card-text">${item["ordertime"]}</p> 
-  <p class="card-text">${item["status"]}</p>
+<p class="card-text" id="${item['item_id']}s">${item["status"]}</p>
+<button onclick="editStatus(${item['item_id']}, ${item['status']})" class="btn btn-warning" id="${item['item_id']}e">Edit Status</button>
+<div class="hidden" id="${item['item_id']}u">
+  <input type="text" id="${item['item_id']}i" name="status" placeholder="Order Status">
+  <button onclick="updateStatus(${item['item_id']}, ${item['status']})" class="btn btn-dark">Update Status</button>
+</div>
+</div>
 </div>
 </div>`;
 
   cart.innerHTML = cartData;
   parent.appendChild(cart);
+}
 
+function editStatus(item_id, status){
+  console.log(item_id,status);
+  let element1=document.getElementById(item_id+"u");
+  element.classList.toggle("hidden");
+  let element2=document.getElementById(item_id+"i");
+  element.value=status;
+  //Here--> Complete Me!
 }

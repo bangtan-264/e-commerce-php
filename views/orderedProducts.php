@@ -9,7 +9,6 @@ require_once 'sellerHeader.php';
 </div>
 
 <script src="public/orderedProducts.js"></script>
-<!-- <script src="public/goToCart.js"></script> -->
 
 <?php
 require_once 'footer.php';

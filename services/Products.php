@@ -153,4 +153,26 @@ class Products
             return "Error";
         }
     }
+
+    public function getOrderedItems()
+    {
+        $obj = new \App\Database();
+        $sql = <<<EOF
+            SELECT products.productName, products.productImage, CONCAT(DATE_PART('day', orders.orderTime),'/',DATE_PART('month', orders.orderTime),'/',DATE_PART('year', orders.orderTime),'  ', DATE_PART('hour', orders.orderTime),':',DATE_PART('minute', orders.orderTime), ':',ROUND(DATE_PART('second', orders.orderTime))) AS orderTime, orders.shippingAddress, orders.transactionId, orderItems.item_id, orderItems.o_id, orderItems.p_id, orderItems.quantity, orderItems.price,orderItems.status -> 'status' AS status FROM products INNER JOIN (orders INNER JOIN orderItems ON orders.o_id=orderItems.o_id) ON products.p_id=orderItems.p_id WHERE orders.u_id={$_SESSION['u_id']} ORDER BY orders.orderTime desc;
+        EOF;
+        $response = $obj->postgres_query_all($sql);
+
+        if (is_array($response) && count($response) > 0) {
+            $res = new \stdClass();
+            $res->msg = "Success";
+            $res->data = $response;
+            echo json_encode($res);
+            exit;
+        } else {
+            $res = new \stdClass();
+            $res->msg = "Failure";
+            echo json_encode($res);
+            exit;
+        }
+    }
 }

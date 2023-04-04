@@ -7,10 +7,8 @@ class Database
     private string $host        = "host = 127.0.0.1";
     private string $port        = "port = 5432";
     private string $dbname      = "dbname = ecommerce_db";
-    private string $credentials = "user = postgres password=postgres";
+    private string $credentials = "user = postgres password = postgres";
     private $db;
-    // private $sql;
-    // private $ret;
 
     public function __construct()
     {
@@ -136,13 +134,15 @@ class Database
                 SELECT * FROM users WHERE email='{$userData['email']}' and password= '{$userData['password']}';
             EOF;
 
-            $ret = pg_query($this->db, $sql);
-            if (!$ret) {
-                throw new \Exception(pg_last_error($this->db));
-            } else {
-                $row = pg_fetch_all($ret);
-                return $row;
-            }
+            pg_send_query($this->db, $sql);
+
+            $result = pg_get_result($this->db);
+            $error = pg_result_error_field($result, PGSQL_DIAG_SQLSTATE);
+            if ($error) {
+                throw new \Exception("Error");
+            } 
+            $arr = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+            return $arr;
         } catch (\Exception $e) {
             $err = $e->getMessage();
             echo $err;

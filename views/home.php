@@ -29,8 +29,7 @@ require_once 'header.php';
 </div>
 
 <script src="public/home.js"></script>
-<!-- <script src="goToCart.js"></script> -->
-<!-- <script src="goToOrders.js"></script> -->
+
 
 <<?php
 require_once 'footer.php';

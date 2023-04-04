@@ -206,4 +206,6 @@ class Seller implements User
             echo json_encode($res);
         }
     }
+
+    
 }

@@ -14,7 +14,7 @@ require_once 'sellerHeader.php';
   <div class="dashboard-item-2">
     <h1>Products Sold</h1>
     <p>You can see the products sold till Now!</p>
-    <a href="/productsSold" class="btn btn-outline-light">View</a>
+    <a href="/orderedProducts" class="btn btn-outline-light">View</a>
   </div>
 </div>
 

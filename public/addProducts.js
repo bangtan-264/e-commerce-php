@@ -55,7 +55,6 @@ function appendOneProduct(item) {
   </div>
   <div class="cart-btn cart-item">
   <button class="btn btn-dark" onclick=editProduct(${item.p_id})>Edit</button>
-  <button onclick="disableEnableProduct(${item.p_id})"  class="btn btn-warning">Disable</button>
   </div>
   </div>`;
 
