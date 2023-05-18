@@ -34,7 +34,7 @@ function saveUserData(user) {
   xhr.send(JSON.stringify(user));
 
   xhr.addEventListener("load", () => {
-    // console.log(xhr.response);
+    console.log(xhr.response);
     let res = JSON.parse(xhr.response);
     
     if (res.msg === "Success") {

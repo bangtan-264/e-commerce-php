@@ -9,7 +9,7 @@ const popUp = document.getElementById("pop-up");
 const closePopup = document.getElementById("close-popup");
 const parent = document.getElementById("cards-wrapper");
 const addProducts = document.getElementById("addProducts");
-const update= document.getElementById("update");
+const update = document.getElementById("update");
 
 displayProducts();
 
@@ -20,14 +20,13 @@ function displayProducts() {
 
   xhr.addEventListener("load", (req, res) => {
     let result = JSON.parse(xhr.response);
-    // console.log(xhr.response);
     if (result.msg === "No products") {
       console.log("You don't have any products");
       parent.innerHTML = "No products";
-    } else if(result.msg==="Success"){
+    } else if (result.msg === "Success") {
       parent.innerHTML = "";
       appendProducts(result.data);
-    }else{
+    } else {
       console.log("Error");
     }
   });
@@ -42,7 +41,7 @@ function appendProducts(products) {
 function appendOneProduct(item) {
   let product = document.createElement("div");
   product.className = "cart";
-  product.id=item['p_id'];
+  product.id = item["p_id"];
 
   let productData = `<div class="cart-img cart-item">
   <img id="${item.p_id}i" class="card-img-top" src="uploads/${item.productimage}" alt="...">
@@ -108,7 +107,7 @@ function insertProduct(form) {
         productdesc: form.get("productDesc"),
         stock: form.get("productStock"),
         productimage: result.img,
-        p_id: result.p_id
+        p_id: result.p_id,
       };
       appendOneProduct(product);
     } else {
@@ -128,7 +127,7 @@ update.addEventListener("click", () => {
     let productImage = prodImage.files[0];
 
     form.append("productName", productName);
-    form.append("price", price);      
+    form.append("price", price);
     form.append("productDesc", productDesc);
     form.append("productStock", productStock);
     form.append("productImage", productImage);
@@ -141,28 +140,27 @@ update.addEventListener("click", () => {
   }
 });
 
-
-function editProduct(p_id){
-  let xhr=new XMLHttpRequest();
-  xhr.open("POST", '/productInfo');
+function editProduct(p_id) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "/productInfo");
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify({p_id: p_id}));
-  xhr.addEventListener("load", ()=>{
-    let result=JSON.parse(xhr.response);
-    if(result.msg==="Success"){
-      let productData=result.data;
-      let p_id=productData['p_id'];
-      prodName.value = productData['productname'];
-      prodPrice.value = productData['price'];
-      prodDesc.value = productData['productdesc'];
-      prodStock.value = productData['stock'];
-      prodImage.key = productData['productimage'];
-      update.value=p_id;
+  xhr.send(JSON.stringify({ p_id: p_id }));
+  xhr.addEventListener("load", () => {
+    let result = JSON.parse(xhr.response);
+    if (result.msg === "Success") {
+      let productData = result.data;
+      let p_id = productData["p_id"];
+      prodName.value = productData["productname"];
+      prodPrice.value = productData["price"];
+      prodDesc.value = productData["productdesc"];
+      prodStock.value = productData["stock"];
+      prodImage.key = productData["productimage"];
+      update.value = p_id;
       submit.classList.toggle("hidden");
       update.classList.toggle("hidden");
       popUp.classList.toggle("hidden");
     }
-  })
+  });
 }
 
 function updateProduct(form) {
@@ -189,7 +187,7 @@ function updateProduct(form) {
         productdesc: form.get("productDesc"),
         stock: form.get("productStock"),
         productimage: result.img,
-        p_id: result.p_id
+        p_id: result.p_id,
       };
 
       updateProductData(product);
@@ -199,22 +197,22 @@ function updateProduct(form) {
   });
 }
 
-function updateProductData(product){
-  let name=document.getElementById(product['p_id']+"n");
-  let image=document.getElementById(product['p_id']+"i");
-  let price=document.getElementById(product['p_id']+"p");
-  let desc=document.getElementById(product['p_id']+"d");
-  let stock=document.getElementById(product['p_id']+"s");
+function updateProductData(product) {
+  let name = document.getElementById(product["p_id"] + "n");
+  let image = document.getElementById(product["p_id"] + "i");
+  let price = document.getElementById(product["p_id"] + "p");
+  let desc = document.getElementById(product["p_id"] + "d");
+  let stock = document.getElementById(product["p_id"] + "s");
 
-  image.src=`uploads/${product.productimage}`;
-  name.innerText=product.productname;
-  price.innerText=product.price;
-  desc.innerText=product.productDesc;
-  stock.innerText=product.stock;
+  image.src = `uploads/${product.productimage}`;
+  name.innerText = product.productname;
+  price.innerText = product.price;
+  desc.innerText = product.productDesc;
+  stock.innerText = product.stock;
 }
 
 // function disableEnableProduct(id){
-  
+
 // }
 
 closePopup.addEventListener("click", function () {

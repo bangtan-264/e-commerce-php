@@ -5,8 +5,9 @@ dispalyOrderItems();
 
 function dispalyOrderItems() {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "/getOrderedItems");
-  xhr.send();
+  xhr.open("POST", "/getOrderedItems");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({orderDuration: "All"}));
   xhr.addEventListener("load", () => {
     let result = JSON.parse(xhr.response);
     if (result.msg === "Success") {

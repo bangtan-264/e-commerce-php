@@ -58,10 +58,11 @@ $router
 ->get('/currentAddressId', [\App\Buyer::class, 'getAddressId'])
 ->post('/currentAddressId', [\App\Buyer::class, 'setaddressId'])
 ->post('/confirmOrder', [\App\Buyer::class, 'confirmOrder'])
-->get('/getOrderedItems', [\App\Products::class, 'getOrderedItems'])
+->post('/getOrderedItems', [\App\Products::class, 'getOrderedItems'])
 ->get('/orderHistory', [\App\Buyer::class, 'displayOrderHistory'])
 ->get('/orderedProducts', [\App\Seller::class, 'displayOrderedProducts'])
-->post('/updateProduct', [\App\Seller::class, 'updateProduct']);
+->post('/updateProduct', [\App\Seller::class, 'updateProduct'])
+->post('/updateStatus', [\App\Products::class, 'updateStatus']);
 
 // echo $router->resolve('/invoices');
 if(isset($_SERVER['PATH_INFO'])){

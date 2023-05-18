@@ -42,7 +42,6 @@ require_once 'sellerHeader.php';
 
 
 <script src="public/addProducts.js"></script>
-<!-- <script src="public/goToCart.js"></script> -->
 
 <?php
 require_once 'footer.php';
